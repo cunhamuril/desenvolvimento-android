@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <TextView
         android:layout_marginTop="40dp"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <Button
         android:layout_marginTop="40dp"
@@ -48,12 +48,34 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Somar" />
 
+    <Button
+        android:id="@+id/btnSubtrair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subtrair"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/btnMultiplicar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Multiplicar"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/btnDividir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dividir"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <EditText
-        android:layout_marginTop="40dp"
         android:id="@+id/edResultado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="number"
+        android:singleLine="true" />
 
 </LinearLayout>

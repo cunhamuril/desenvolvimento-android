@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Button btSomar;
+    public Button btSomar, btSubtrair, btMultiplicar, btDividir;
     public EditText edNum01, edNum02, edResultado;
     public Integer n1, n2, total;
 
@@ -25,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
         edNum01 = (EditText)findViewById(R.id.edNum01);
         edNum02 = (EditText)findViewById(R.id.edNum02);
         edResultado = (EditText)findViewById(R.id.edResultado);
+
         btSomar = (Button)findViewById(R.id.btnSomar);
+        btSubtrair = (Button)findViewById(R.id.btnSubtrair);
+        btMultiplicar = (Button)findViewById(R.id.btnMultiplicar);
+        btDividir = (Button)findViewById(R.id.btnDividir);
     }
 
     public void botoes() {
@@ -36,6 +40,42 @@ public class MainActivity extends AppCompatActivity {
                 n2 = Integer.valueOf(edNum02.getText().toString());
 
                 total = n1 + n2;
+
+                edResultado.setText(total.toString());
+            }
+        });
+
+        btSubtrair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                n1 = Integer.valueOf(edNum01.getText().toString());
+                n2 = Integer.valueOf(edNum02.getText().toString());
+
+                total = n1 - n2;
+
+                edResultado.setText(total.toString());
+            }
+        });
+
+        btMultiplicar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                n1 = Integer.valueOf(edNum01.getText().toString());
+                n2 = Integer.valueOf(edNum02.getText().toString());
+
+                total = n1 * n2;
+
+                edResultado.setText(total.toString());
+            }
+        });
+
+        btDividir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                n1 = Integer.valueOf(edNum01.getText().toString());
+                n2 = Integer.valueOf(edNum02.getText().toString());
+
+                total = n1 / n2;
 
                 edResultado.setText(total.toString());
             }
