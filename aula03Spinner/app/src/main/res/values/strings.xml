@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">aula03Spinner</string>
+    <string-array name="mtOperacoes">
+        <item>Somar</item>
+        <item>Subtrair</item>
+    </string-array>
+</resources>
