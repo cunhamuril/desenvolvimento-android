@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="1º Valor"
         android:inputType="number" />
 
     <EditText
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="2º Valor"
         android:inputType="number" />
 
     <Button
@@ -37,13 +39,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Resultado" />
+        android:text="Resultado"
+        android:background="@android:color/holo_blue_light"/>
 
     <Button
         android:id="@+id/btnLimpar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Limpar" />
+        android:text="Limpar"
+        android:background="@android:color/holo_red_light"
+        android:textColor="@android:color/background_light"/>
 
     <TextView
         android:id="@+id/txtResultado"

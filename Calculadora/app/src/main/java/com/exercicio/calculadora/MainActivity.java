@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     public Spinner spnOperacao;
@@ -37,39 +38,60 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calculate() {
-        spnOperacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                btnCalcular.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        n1 = Double.valueOf(edtN1.getText().toString());
-                        n2 = Double.valueOf(edtN2.getText().toString());
+            spnOperacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if(!edtN1.getText().toString().equals("") || !edtN2.getText().toString().equals("")) {
+                        btnCalcular.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                n1 = Double.valueOf(edtN1.getText().toString());
+                                n2 = Double.valueOf(edtN2.getText().toString());
 
-                        Integer option = (int) spnOperacao.getSelectedItemId();
+                                Integer option = (int) spnOperacao.getSelectedItemId();
 
-                        switch (option){
-                            case 0: res = n1 + n2;
-                                break;
-                            case 1: res = n1 - n2;
-                                break;
-                            case 2: res = n1 * n2;
-                                break;
-                            case 3: res = n1 / n2;
-                                break;
-                        }
-
-                        txtResultado.setText(res.toString());
+                                switch (option) {
+                                    case 0:
+                                        txtResultado.setText("0");
+                                        Toast.makeText(getApplicationContext(),
+                                                "Selecione uma operação!",
+                                                Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 1:
+                                        res = n1 + n2;
+                                        break;
+                                    case 2:
+                                        res = n1 - n2;
+                                        break;
+                                    case 3:
+                                        res = n1 * n2;
+                                        break;
+                                    case 4:
+                                        res = n1 / n2;
+                                        break;
+                                    default:
+                                }
+                                txtResultado.setText(res.toString());
+                            }
+                        });
+                    } else {
+                        btnCalcular.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Preencha os campos",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
-                });
 
-            }
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
+                }
+            });
     }
 
     public void clean() {
