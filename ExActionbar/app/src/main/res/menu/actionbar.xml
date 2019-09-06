@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/adicionar"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Adicionar"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/telaCalc"
+        android:icon="@android:drawable/btn_plus"
+        android:title="Tela calculadora"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/opa"
+        android:icon="@android:color/holo_green_dark"
+        android:title="Opa"
+        app:showAsAction="never"/>
+
+</menu>
