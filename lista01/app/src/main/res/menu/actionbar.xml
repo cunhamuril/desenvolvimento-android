@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/conversor"
+        android:title="@string/conversor"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/question"
+        android:title="@string/questionario"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/media"
+        android:title="@string/calcular_media"
+        app:showAsAction="collapseActionView"/>
+
+</menu>

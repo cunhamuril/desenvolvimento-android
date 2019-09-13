@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Lista 02</string>
+    <string name="conversor">Conversor</string>
+    <string name="questionario">Questionário</string>
+    <string name="calcular_media">Calcular Média</string>
+    <string name="informe_uma_medida_em_metros">Informe uma medida em metros</string>
+    <string name="converter">Converter</string>
+    <string name="resultado">Resultado</string>
+    <string name="informe_os_valores">Informe os valores</string>
+    <string name="p1">P1</string>
+    <string name="projeto">Projeto</string>
+    <string name="listas">Listas</string>
+    <string name="pmu">PMU</string>
+    <string name="situa_o">Situação:</string>
+    <string name="calcular">Calcular</string>
+    <string name="em_que_ano_o_homem_pisou_na_lua_pela_primeira_vez">Em que ano o homem pisou na lua pela primeira vez?</string>
+    <string name="em_que_ano_foi_declarado_o_fim_da_2_guerra_mundial">Em que ano foi declarado o fim da 2ª Guerra Mundial</string>
+    <string-array name="convertType">
+        <item>Selecione o tipo</item>
+        <item>Km</item>
+        <item>Jardas</item>
+        <item>Hectares</item>
+        <item>Acres</item>
+    </string-array>
+</resources>
