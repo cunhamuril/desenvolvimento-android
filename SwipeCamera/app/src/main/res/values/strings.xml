@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SwipeCamera</string>
+    <string name="leitorcdbarras"><![CDATA[<- Leitor de Código de Barras]]></string>
+    <string name="camera"><![CDATA[Câmera ->]]></string>
+</resources>

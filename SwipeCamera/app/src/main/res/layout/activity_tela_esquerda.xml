@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TelaEsquerdaActivity">
+
+    <Button
+        android:id="@+id/btnLerCodigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LER CÓDIGO DE BARRAS" />
+
+    <EditText
+        android:id="@+id/edtCodigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28dp"
+        android:inputType="textPersonName"
+        android:text="....." />
+
+</LinearLayout>
