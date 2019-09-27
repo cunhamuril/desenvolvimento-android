@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Prova1MuriloCunha</string>
+    <string name="camera">Camera</string>
+    <string name="tirar_fota">Tirar foto</string>
+    <string name="jokey_po">Jokey Po</string>
+    <string name="voce">Você</string>
+    <string name="computador">Computador</string>
+</resources>
