@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "100548990591",
+    "firebase_url": "https://testefb-aulales.firebaseio.com",
+    "project_id": "testefb-aulales",
+    "storage_bucket": "testefb-aulales.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100548990591:android:882e269e7a0d96bc3fd14a",
+        "android_client_info": {
+          "package_name": "com.exercicio.testefb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100548990591-77acoiphu821ntrauraabgnih76lfkmj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEkUAFR8UO8MV5iu0Yu-9QWcDO3IAqXyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100548990591-77acoiphu821ntrauraabgnih76lfkmj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
