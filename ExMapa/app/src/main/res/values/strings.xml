@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ExMapa</string>
+    <string name="permission_required_toast" />
+    <string name="location_permission_denied" />
 </resources>
