@@ -85,7 +85,7 @@ public class FlappyBird extends ApplicationAdapter {
         posicaoInicialVertical = alturaDispositivo / 2;
 
         posicaoMovimentoCanoHorizontal = larguraDispositivo;
-        espacoEntreCanos = 300;
+        espacoEntreCanos = 400;
     }
 
     @Override
@@ -97,7 +97,7 @@ public class FlappyBird extends ApplicationAdapter {
 
         // bater de asas do passaro
         variacao += deltaTime * 10;
-        if (variacao > 2) variacao = 0;
+        if (variacao >= 3) variacao = 0;
 
         // condição que verifica se o jogo foi iniciado ou não
         if (estadoJogo == 0) {
@@ -167,7 +167,7 @@ public class FlappyBird extends ApplicationAdapter {
                 posicaoMovimentoCanoHorizontal,
                 alturaDispositivo / 2 - canoBaixo.getHeight() - espacoEntreCanos / 2 + alturaEntreCanosRandomica
         );
-        batch.draw(passaro[(int) variacao], 120, posicaoInicialVertical);
+        batch.draw(passaro[(int) variacao], 120, posicaoInicialVertical, 120, 95);
         fonte.draw(batch, String.valueOf(pontuacao), larguraDispositivo / 2, alturaDispositivo - 50);
 
         if (estadoJogo == 2) {
@@ -178,8 +178,8 @@ public class FlappyBird extends ApplicationAdapter {
         batch.end();
 
         passaroCirculo.set(
-                120 + passaro[0].getWidth() / 2,
-                posicaoInicialVertical + passaro[0].getHeight() / 2,
+                120 + passaro[0].getWidth(),
+                posicaoInicialVertical + passaro[0].getHeight(),
                 passaro[0].getWidth() / 2
         );
         retanguloCanoBaixo = new Rectangle(
@@ -195,12 +195,12 @@ public class FlappyBird extends ApplicationAdapter {
                 canoBaixo.getHeight()
         );
 
-        // Desenhar formas
+        // Desenhar formas. Selecionado para caso precise utilizar novamente
 //        shape.begin(ShapeRenderer.ShapeType.Filled);
 //        shape.circle( passaroCirculo.x, passaroCirculo.y, passaroCirculo.radius);
 //        shape.rect(retanguloCanoBaixo.x, retanguloCanoBaixo.y, retanguloCanoBaixo.width, retanguloCanoBaixo.height);
 //        shape.rect(retanguloCanoTopo.x, retanguloCanoTopo.y, retanguloCanoTopo.width, retanguloCanoTopo.height);
-//        shape.setColor(Color.RED);
+//        shape.setColor(Color.GREEN);
 //        shape.end();
 
         // teste de colisao
