@@ -26,6 +26,7 @@ public class FlappyBird extends ApplicationAdapter {
     private Texture canoBaixo;
     private Texture canoTopo;
     private Texture gameOver;
+    private Texture btnPlay;
 
     private Random numeroRandomico;
 
@@ -38,6 +39,7 @@ public class FlappyBird extends ApplicationAdapter {
 //    private ShapeRenderer shape;
 
     // Atributos de configuração
+    private int record = 0;
     private int pontuacao = 0;
     private int estadoJogo = 0; // 0 -> jogo não iniciado | 1 -> jogo iniciado | 2 -> Tela game over
 
@@ -57,8 +59,8 @@ public class FlappyBird extends ApplicationAdapter {
     // camera
     private OrthographicCamera camera;
     private Viewport viewport;
-    private final float VIRTUAL_WIDTH = 880;
-    private final float VIRTUAL_HEIGHT = 1620;
+    private final float VIRTUAL_WIDTH = 768;
+    private final float VIRTUAL_HEIGHT = 1366;
 
     @Override
     public void create() {
@@ -87,6 +89,7 @@ public class FlappyBird extends ApplicationAdapter {
         canoBaixo = new Texture("cano_baixo_maior.png");
         canoTopo = new Texture("cano_topo_maior.png");
         gameOver = new Texture("game_over.png");
+        btnPlay = new Texture("play.png");
 
         larguraDispositivo = VIRTUAL_WIDTH;
         alturaDispositivo = VIRTUAL_HEIGHT;
@@ -97,7 +100,7 @@ public class FlappyBird extends ApplicationAdapter {
         camera = new OrthographicCamera();
         camera.position.set(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, 0);
 
-        viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, camera);
+        viewport = new StretchViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, camera);
         /**
           *
           */
@@ -159,6 +162,9 @@ public class FlappyBird extends ApplicationAdapter {
                     /**
                      * aqui vai regitrar o record
                      */
+                    if (pontuacao > record) {
+                        record = pontuacao;
+                    }
 
                     // Ao reniciar...
                     estadoJogo = 0;
@@ -197,6 +203,11 @@ public class FlappyBird extends ApplicationAdapter {
 //        batch.draw(passaro[(int) variacao], 120, posicaoInicialVertical);
         batch.draw(passaro[(int) variacao], 120, posicaoInicialVertical, 100, 75);
         fonte.draw(batch, String.valueOf(pontuacao), larguraDispositivo / 2, alturaDispositivo - 50);
+
+        if (estadoJogo == 0) {
+            batch.draw(btnPlay, larguraDispositivo / 2 - btnPlay.getWidth() / 2, alturaDispositivo / 2 - btnPlay.getHeight() / 2);
+            mensagem.draw(batch, "Record atual: " + record ,larguraDispositivo / 2 - btnPlay.getWidth() / 2, alturaDispositivo / 2 - btnPlay.getHeight() / 2);
+        }
 
         if (estadoJogo == 2) {
             batch.draw(gameOver, larguraDispositivo / 2 - gameOver.getWidth() / 2, alturaDispositivo / 2);
