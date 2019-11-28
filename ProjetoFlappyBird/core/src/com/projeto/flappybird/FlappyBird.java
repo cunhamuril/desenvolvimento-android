@@ -16,10 +16,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import java.sql.Connection;
 
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+public interface ActionResolver { public Connection getConnection(); }
 
 public class FlappyBird extends ApplicationAdapter {
     private SpriteBatch batch;
@@ -181,6 +184,7 @@ public class FlappyBird extends ApplicationAdapter {
                     }
 
                     // Ao reniciar...
+                    marcouPonto = false;
                     estadoJogo = 0;
                     pontuacao = 0;
                     velocidadeQueda = 0;
@@ -214,7 +218,6 @@ public class FlappyBird extends ApplicationAdapter {
                 posicaoMovimentoCanoHorizontal,
                 alturaDispositivo / 2 - canoBaixo.getHeight() - espacoEntreCanos / 2 + alturaEntreCanosRandomica
         );
-//        batch.draw(passaro[(int) variacao], 120, posicaoInicialVertical);
         batch.draw(passaro[(int) variacao], 120, posicaoInicialVertical, 100, 75);
         fonte.draw(batch, String.valueOf(pontuacao), larguraDispositivo / 2, alturaDispositivo - 50);
 
