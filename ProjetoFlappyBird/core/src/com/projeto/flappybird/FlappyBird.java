@@ -2,6 +2,7 @@ package com.projeto.flappybird;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,6 +18,8 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class FlappyBird extends ApplicationAdapter {
     private SpriteBatch batch;
@@ -27,6 +30,11 @@ public class FlappyBird extends ApplicationAdapter {
     private Texture canoTopo;
     private Texture gameOver;
     private Texture btnPlay;
+
+    private Sound sfxDie;
+    private Sound sfxHit;
+    private Sound sfxPoint;
+    private Sound sfxWing;
 
     private Random numeroRandomico;
 
@@ -55,6 +63,7 @@ public class FlappyBird extends ApplicationAdapter {
     private float deltaTime;
 
     private boolean marcouPonto;
+    private boolean toqueSom;
 
     // camera
     private OrthographicCamera camera;
@@ -91,6 +100,11 @@ public class FlappyBird extends ApplicationAdapter {
         gameOver = new Texture("game_over.png");
         btnPlay = new Texture("play.png");
 
+        sfxDie = Gdx.audio.newSound(Gdx.files.internal("sounds/sfx_die.wav"));
+        sfxHit = Gdx.audio.newSound(Gdx.files.internal("sounds/sfx_hit.wav"));
+        sfxPoint = Gdx.audio.newSound(Gdx.files.internal("sounds/sfx_point.wav"));
+        sfxWing = Gdx.audio.newSound(Gdx.files.internal("sounds/sfx_wing.wav"));
+
         larguraDispositivo = VIRTUAL_WIDTH;
         alturaDispositivo = VIRTUAL_HEIGHT;
 
@@ -102,13 +116,13 @@ public class FlappyBird extends ApplicationAdapter {
 
         viewport = new StretchViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, camera);
         /**
-          *
-          */
+         *
+         */
 
         posicaoInicialVertical = alturaDispositivo / 2;
 
         posicaoMovimentoCanoHorizontal = larguraDispositivo;
-        espacoEntreCanos = 400;
+        espacoEntreCanos = 300;
     }
 
     @Override
@@ -116,9 +130,7 @@ public class FlappyBird extends ApplicationAdapter {
 
         camera.update();
 
-        //Gdx.gl.glClearColor(1, 0, 0, 1);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // esta linha de código não existe na video aula, mas sem ela dá um bug estranho
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT); // esta linha de código não existe na video aula, mas sem ela dá um bug estranho
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         deltaTime = Gdx.graphics.getDeltaTime();
 
@@ -135,18 +147,20 @@ public class FlappyBird extends ApplicationAdapter {
             velocidadeQueda++;
 
             if (estadoJogo == 1) {
+                toqueSom = true;
                 // movimentação dos canos
-                posicaoMovimentoCanoHorizontal -= deltaTime * 200;
+                posicaoMovimentoCanoHorizontal -= deltaTime * 400;
 
                 // condição que verifica se a tela foi tocada
                 if (Gdx.input.justTouched()) {
-                    velocidadeQueda = -20;
+                    velocidadeQueda = -18;
+                    sfxWing.play();
                 }
 
                 // verifica se o cano saiu inteiramente da tela
-                if (posicaoMovimentoCanoHorizontal < -canoTopo.getWidth()) {
-                    posicaoMovimentoCanoHorizontal = larguraDispositivo - 100;
-                    alturaEntreCanosRandomica = numeroRandomico.nextInt(700) - 500;
+                if (posicaoMovimentoCanoHorizontal < (-canoTopo.getWidth() - canoTopo.getWidth())) {
+                    posicaoMovimentoCanoHorizontal = larguraDispositivo;
+                    alturaEntreCanosRandomica = numeroRandomico.nextInt(600) - 200;
                     marcouPonto = false;
                 }
 
@@ -155,13 +169,13 @@ public class FlappyBird extends ApplicationAdapter {
                     if (!marcouPonto) {
                         pontuacao++;
                         marcouPonto = true;
+                        sfxPoint.play();
                     }
                 }
             } else { // tela de game over
                 if (Gdx.input.justTouched()) {
-                    /**
-                     * aqui vai regitrar o record
-                     */
+
+                    // registrar record
                     if (pontuacao > record) {
                         record = pontuacao;
                     }
@@ -206,12 +220,12 @@ public class FlappyBird extends ApplicationAdapter {
 
         if (estadoJogo == 0) {
             batch.draw(btnPlay, larguraDispositivo / 2 - btnPlay.getWidth() / 2, alturaDispositivo / 2 - btnPlay.getHeight() / 2);
-            mensagem.draw(batch, "Record atual: " + record ,larguraDispositivo / 2 - btnPlay.getWidth() / 2, alturaDispositivo / 2 - btnPlay.getHeight() / 2);
+            mensagem.draw(batch, "Record atual: " + record, larguraDispositivo / 2 - btnPlay.getWidth() / 2, alturaDispositivo / 2 - btnPlay.getHeight() / 2);
         }
 
         if (estadoJogo == 2) {
             batch.draw(gameOver, larguraDispositivo / 2 - gameOver.getWidth() / 2, alturaDispositivo / 2);
-            mensagem.draw(batch, "Toque para reiniciar" ,larguraDispositivo / 2 - gameOver.getWidth() / 2, alturaDispositivo / 2 - gameOver.getHeight() / 2);
+            mensagem.draw(batch, "Toque para reiniciar", larguraDispositivo / 2 - gameOver.getWidth() / 2, alturaDispositivo / 2 - gameOver.getHeight() / 2);
         }
 
         batch.end();
@@ -243,9 +257,32 @@ public class FlappyBird extends ApplicationAdapter {
 //        shape.end();
 
         // teste de colisao
+        if (Intersector.overlaps(passaroCirculo, retanguloCanoBaixo) || Intersector.overlaps(passaroCirculo, retanguloCanoTopo)) {
+
+            // teste para tocar som apenas uma vez ao tocar cano
+            if (toqueSom) {
+                sfxHit.play();
+
+                // timer que toca som 330ms depois do som de hit
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        sfxDie.play();
+                    }
+                }, 330);
+
+                toqueSom = false;
+            }
+        }
+
         if (Intersector.overlaps(passaroCirculo, retanguloCanoBaixo) || Intersector.overlaps(passaroCirculo, retanguloCanoTopo)
                 || (posicaoInicialVertical <= 0) || (posicaoInicialVertical >= alturaDispositivo)) {
             estadoJogo = 2;
+
+            if (toqueSom) {
+                sfxHit.play();
+                toqueSom = false;
+            }
         }
     }
 
@@ -273,5 +310,10 @@ public class FlappyBird extends ApplicationAdapter {
         canoTopo.dispose();
 
         fonte.dispose();
+
+        sfxDie.dispose();
+        sfxHit.dispose();
+        sfxPoint.dispose();
+        sfxWing.dispose();
     }
 }
