@@ -148,8 +148,32 @@ public class FlappyBird extends ApplicationAdapter {
 
             if (estadoJogo == 1) {
                 toqueSom = true;
+
                 // movimentação dos canos
-                posicaoMovimentoCanoHorizontal -= deltaTime * 400;
+                int aceleracao = 350;
+
+                if (pontuacao >= 5) {
+                    aceleracao = 400;
+                } else if (pontuacao >= 10) {
+                    aceleracao = 450;
+                } else if (pontuacao >= 15) {
+                    aceleracao = 500;
+                } else if (pontuacao >= 20) {
+                    aceleracao = 550;
+                } else if (pontuacao >= 25) {
+                    aceleracao = 600;
+                } else if (pontuacao >= 30) {
+                    aceleracao = 650;
+                } else if (pontuacao >= 35) {
+                    aceleracao = 700;
+                } else if (pontuacao >= 40) {
+                    aceleracao = 750;
+                }
+                /**
+                 *
+                 */
+
+                posicaoMovimentoCanoHorizontal -= deltaTime * aceleracao;
 
                 // condição que verifica se a tela foi tocada
                 if (Gdx.input.justTouched()) {
@@ -181,6 +205,7 @@ public class FlappyBird extends ApplicationAdapter {
                     }
 
                     // Ao reniciar...
+                    marcouPonto = false;
                     estadoJogo = 0;
                     pontuacao = 0;
                     velocidadeQueda = 0;
